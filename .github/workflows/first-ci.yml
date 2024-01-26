@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: My actions
 
 run-name: ${{ github.actor }} is testing out GitHub Actions
 
@@ -10,17 +10,33 @@ on:
 
       - main
 
-      - jenk
+      - second
+      
+  pull_request:
+    
+    types:
 
+      - opened
+        
+      - synchronize
+      
   workflow_dispatch:
 
 jobs:
 
   Explore-GitHub-Actions:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
+
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
+      
+        with:
+        
+          python-version: '3.10'
 
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
 
@@ -43,7 +59,5 @@ jobs:
           ls ${{ github.workspace }}
 
       - run: echo "This job's status is ${{ job.status }}."
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+      
+      
